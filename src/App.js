@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Nav />
-      <Toaster position="bottom-right" />
+      <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/register" element={<Register />} />
