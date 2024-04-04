@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import Input from '../components/Input'
+import Button from '../components/Button'
 
 const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const handleClick = async () => {
+    console.log(name, email, password)
+  }
 
   return (
     <div className="d-flex justify-content-center" style={{ height: '88vh' }}>
@@ -28,6 +33,10 @@ const Register = () => {
               value={password}
               setValue={setPassword}
             />
+
+            <div className="d-grid">
+              <Button handleClick={handleClick} text="Register" size="small" />
+            </div>
           </div>
         </div>
       </div>
