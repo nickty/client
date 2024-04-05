@@ -3,14 +3,16 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import toast from 'react-hot-toast'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
-  const [name, setName] = useState('mizan')
-  const [email, setEmail] = useState('mizan@gmail.com')
-  const [password, setPassword] = useState('124578')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const navigate = useNavigate()
 
   const handleClick = async (e) => {
-    console.log(name, email, password)
     try {
       e.preventDefault()
       const { data } = await axios.post('http://localhost:8000/api/register', {
@@ -21,7 +23,13 @@ const Register = () => {
       if (data.error) {
         toast.error(data.error)
       } else {
-        toast.success('Registration successfull! Please login')
+        setName('')
+        setEmail('')
+        setPassword('')
+        toast.success(
+          `Hey ${data.user.name}. You are now part of our community, Congrats!`
+        )
+        navigate('/login')
       }
     } catch (error) {
       console.log(error)
