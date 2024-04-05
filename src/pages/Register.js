@@ -29,7 +29,8 @@ const Register = () => {
         toast.success(
           `Hey ${data.user.name}. You are now part of our community, Congrats!`
         )
-        navigate('/login')
+        localStorage.setItem('auth', JSON.stringify(data))
+        navigate('/')
       }
     } catch (error) {
       console.log(error)
