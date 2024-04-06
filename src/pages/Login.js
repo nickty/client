@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const [state, seState] = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -25,6 +28,7 @@ const Login = () => {
         setEmail('')
         setPassword('')
         localStorage.setItem('auth', JSON.stringify(data))
+        seState(data)
         navigate('/')
       }
     } catch (error) {

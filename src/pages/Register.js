@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context'
 
 const Register = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const [state, seState] = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -30,6 +33,7 @@ const Register = () => {
           `Hey ${data.user.name}. You are now part of our community, Congrats!`
         )
         localStorage.setItem('auth', JSON.stringify(data))
+        seState(data)
         navigate('/')
       }
     } catch (error) {

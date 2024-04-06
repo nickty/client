@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { isAuth } from '../utils/func'
+import { UserContext } from '../context'
 
 const Nav = () => {
+  const [state, seState] = useContext(UserContext)
   const navigate = useNavigate()
   const logout = () => {
     localStorage.removeItem('auth')
