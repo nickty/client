@@ -2,9 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../context'
 import PriceCard from '../components/cards/PriceCard'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   const [prices, setPrices] = useState([])
+  const [state, seState] = useContext(UserContext)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchPrice()
@@ -16,9 +20,20 @@ const Home = () => {
     console.log('prices', data)
   }
 
-  const handleClick = (e) => {
+  const handleClick = async (e, price) => {
     e.preventDefault()
-    console.log(e)
+    if (state && state.token) {
+      const { data } = await axios.post(
+        'http://localhost:8000/api/create-subscription',
+        {
+          price: price.id,
+        }
+      )
+      console.log('eeee', data)
+      window.open(data)
+    } else {
+      navigate('/register')
+    }
   }
 
   return (

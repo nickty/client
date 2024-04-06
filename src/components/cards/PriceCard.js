@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../../context'
 
 const PriceCard = ({ price, handleClick }) => {
-  console.log('single price', price)
+  const [state, seState] = useContext(UserContext)
+
+  const buttonText = () => {
+    return state && state.token ? 'Buy the plan' : 'Sign Up'
+  }
   return (
     <div className="col">
       <div className="card mb-4 rounded-3 shadow-sm">
@@ -28,10 +33,10 @@ const PriceCard = ({ price, handleClick }) => {
             <li>5 exlusive storkces</li>
           </ul>
           <button
-            onClick={() => handleClick(price)}
+            onClick={(e) => handleClick(e, price)}
             className="w-100 btn-lg btn-outline-danger"
           >
-            Sign up
+            {buttonText()}
           </button>
         </div>
       </div>
